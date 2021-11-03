@@ -5,8 +5,8 @@ import 'package:news_app_flutter/app/modules/user_auth/local_widgets/utils.dart'
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-  final controller = Get.put(UserAuth());
-
+  final GlobalKey loginFormKey = GlobalKey();
+  final controller = Get.find<AuthController>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
                       subHeading("Please signin to continue!", context),
                       spacer(40.0),
                       Form(
-                          key: controller.loginFormKey,
+                          key: loginFormKey,
                           child: Column(
                             children: [
                               emailInputField(_emailController),
@@ -41,17 +41,23 @@ class LoginScreen extends StatelessWidget {
                       spacer(15.0),
                       submitFormButton(
                           "Login",
+                          ()async{
                           controller.login(
-                            _emailController,
-                            _passwordController,
-                          ),
+                            _emailController.text.trim(),
+                            _passwordController.text.trim(),
+                          );
+                          },
                           context),
                       spacer(35.0),
                       Container(
                         alignment: Alignment.bottomCenter,
                         child: toggleLoginSignupText(
                             context, "Not a user? ", "Signup here ", "/signup"),
-                      )
+                      ),
+                      ElevatedButton(onPressed: (){
+                        controller.signInWithGoogle();
+                      }, child: Text("Signin With Google"))
+                      
                     ],
                   ),
                 ),

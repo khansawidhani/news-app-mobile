@@ -5,7 +5,8 @@ import 'package:news_app_flutter/app/modules/user_auth/local_widgets/utils.dart'
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({Key? key}) : super(key: key);
-  final controller = Get.put(UserAuth());
+  final controller = Get.find<AuthController>();
+  final GlobalKey signupFormKey = GlobalKey();
   final TextEditingController _fullnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -32,7 +33,7 @@ class SignupScreen extends StatelessWidget {
                       subHeading("Signup to get started!", context),
                       spacer(40.0),
                       Form(
-                          key: controller.signupFormKey,
+                          key: signupFormKey,
                           child: Column(
                             children: [
                               userNameInputField(_fullnameController),
@@ -48,11 +49,9 @@ class SignupScreen extends StatelessWidget {
                       spacer(15.0),
                       submitFormButton(
                           "Create Account",
-                          controller.signup(
-                              _fullnameController,
-                              _emailController,
-                              _passwordController,
-                              _confirmPasswordController),
+                          ()async{
+                            controller.signup(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim());
+                          },
                           context),
                       spacer(35.0),
                       Container(
