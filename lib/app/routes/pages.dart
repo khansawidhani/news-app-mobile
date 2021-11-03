@@ -1,8 +1,8 @@
 import 'package:get/route_manager.dart';
-import 'package:the_news/app/modules/home_page/view.dart';
-import 'package:the_news/app/modules/user_auth/login/view.dart';
-import 'package:the_news/app/modules/user_auth/signup/view.dart';
-import 'package:the_news/app/routes/routes.dart';
+import 'package:news_app_flutter/app/modules/home_page/view.dart';
+import 'package:news_app_flutter/app/modules/user_auth/login/view.dart';
+import 'package:news_app_flutter/app/modules/user_auth/signup/view.dart';
+import 'package:news_app_flutter/app/routes/routes.dart';
 
 class AddPages{
   static final pages = [
