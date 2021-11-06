@@ -1,25 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-// spacer for sizing 
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+
+// spacer for sizing
 SizedBox spacer(double height) {
   return SizedBox(height: height);
 }
+
 // user auth screens background
-SizedBox authScreenBg(context){
+SizedBox authScreenBg(context) {
   return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Image(
-                image: const AssetImage(
-                  "assets/images/bg.jpg",
-                ),
-                fit: BoxFit.cover,
-                color: Colors.black.withOpacity(0.7),
-                colorBlendMode: BlendMode.darken,
-              ),
-            );
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    child: Image(
+      image: const AssetImage(
+        "assets/images/bg.jpg",
+      ),
+      fit: BoxFit.cover,
+      color: Colors.black.withOpacity(0.7),
+      colorBlendMode: BlendMode.darken,
+    ),
+  );
 }
+
 // user auth screens heading
 Text topHeading(String text, context) {
   return Text(
@@ -27,6 +31,7 @@ Text topHeading(String text, context) {
     style: Theme.of(context).textTheme.headline1,
   );
 }
+
 // user auth screens sub heading
 Text subHeading(String text, context) {
   return Text(
@@ -46,26 +51,27 @@ TextFormField userNameInputField(TextEditingController _controller) {
         const InputDecoration(hintText: "Username", labelText: "Username"),
   );
 }
+
 // user email field
 TextFormField emailInputField(TextEditingController _controller) {
   return TextFormField(
     controller: _controller,
-
     style: inputStyle,
     decoration: const InputDecoration(hintText: "Email", labelText: "Email"),
   );
 }
+
 // password field
 TextFormField passwordInputField(TextEditingController _controller) {
   return TextFormField(
     controller: _controller,
-
     obscureText: true,
     style: inputStyle,
     decoration:
         const InputDecoration(hintText: "Password", labelText: "Password"),
   );
 }
+
 // confirm password field
 TextFormField confirmPasswordInputField(TextEditingController _controller) {
   return TextFormField(
@@ -76,12 +82,12 @@ TextFormField confirmPasswordInputField(TextEditingController _controller) {
         hintText: "Confirm Password", labelText: "Confirm Password"),
   );
 }
+
 // form submit button
 submitFormButton(String text, onPressed, context) {
   return Container(
     alignment: Alignment.topCenter,
     child: ElevatedButton(
-      
         onPressed: onPressed,
         child: Text(
           text,
@@ -89,6 +95,7 @@ submitFormButton(String text, onPressed, context) {
         )),
   );
 }
+
 // text to navigate between login and signup screen
 toggleLoginSignupText(context, String text, String subText, String routePath) {
   return RichText(
@@ -111,4 +118,26 @@ toggleLoginSignupText(context, String text, String subText, String routePath) {
             Navigator.pushNamed(context, routePath);
           }),
   ]));
+}
+
+orText() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: const[
+    Expanded(child: Divider(indent: 5.0, endIndent: 8.0, color: Colors.white70, thickness: 1.5,)),
+    Text(
+      'OR',
+      style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
+    ),
+    Expanded(child: Divider(indent: 8.0, endIndent: 5.0, color: Colors.white70, thickness: 1.5,))
+  ]);
+}
+
+authWithGoogle(onPressed) {
+  return SignInButton(
+    Buttons.GoogleDark,
+    onPressed: onPressed,
+    text: "Continue with Google",
+  );
+  // ElevatedButton(onPressed: onPressed, child: const Text("Signin With Google"));
 }

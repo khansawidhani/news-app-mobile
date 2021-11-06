@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app_flutter/app/modules/user_auth/controller.dart';
@@ -8,24 +7,24 @@ class HomePage extends StatelessWidget {
   HomePage({ Key? key }) : super(key: key);
   final authController = Get.find<AuthController>();
   final String title = "HomePage";  
-  final data = Get.arguments;
-
+  bool islogin = Constants.prefs!.getBool('loggedin') == true;
   @override
   Widget build(BuildContext context) {
-    
-    print(data);
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(title: Text(title),),
       body: Center(
         child: Column(
           children: [
             Container(
-child: Text(data != null ? Constants.prefs!.getString("uid").toString(): "Welcome Guest", style: TextStyle(color: Colors.white, fontSize: 20.0),),
+child: Text( islogin? "Welcome ${Constants.prefs!.getString('uid').toString()}":"Welcome Guest", style: TextStyle(color: Colors.indigo, fontSize: 20.0),),
             ),
             ElevatedButton(onPressed: (){
+            
               authController.signOut();
-            }, child: Text("Logout"))
+            },
+            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.grey)),
+             child: Text("Logout", style: TextStyle(color: Colors.black),))
           ],
         ),
       ),

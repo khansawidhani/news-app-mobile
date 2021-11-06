@@ -54,9 +54,18 @@ class LoginScreen extends StatelessWidget {
                         child: toggleLoginSignupText(
                             context, "Not a user? ", "Signup here ", "/signup"),
                       ),
-                      ElevatedButton(onPressed: (){
-                        controller.signInWithGoogle();
-                      }, child: Text("Signin With Google"))
+                      spacer(20.0),
+                      orText(),
+                      spacer(20.0),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0))
+                        ),
+                        alignment: Alignment.bottomCenter,
+                        child: authWithGoogle(()async{
+                          controller.signInWithGoogle();
+                        })
+                      )
                       
                     ],
                   ),

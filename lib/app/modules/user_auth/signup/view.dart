@@ -47,17 +47,27 @@ class SignupScreen extends StatelessWidget {
                             ],
                           )),
                       spacer(15.0),
-                      submitFormButton(
-                          "Create Account",
-                          ()async{
-                            controller.signup(_fullnameController.text.trim(), _emailController.text.trim(), _passwordController.text.trim());
-                          },
-                          context),
+                      submitFormButton("Create Account", () async {
+                        controller.signup(
+                          _fullnameController.text.trim(),
+                          _emailController.text.trim(),
+                          _passwordController.text.trim(),
+                          _confirmPasswordController.text.trim()
+                        
+                        );
+                      }, context),
                       spacer(35.0),
                       Container(
                         alignment: Alignment.bottomCenter,
                         child: toggleLoginSignupText(context,
                             "Already a user? ", "Login here ", "/login"),
+                      ), 
+                      spacer(20.0),
+                      orText(),
+                      spacer(20.0),
+                      Container(
+                        alignment: Alignment.topCenter,
+                        child: authWithGoogle(()async{controller.signInWithGoogle();}),
                       )
                     ],
                   ),
@@ -70,6 +80,3 @@ class SignupScreen extends StatelessWidget {
     );
   }
 }
-
-
-

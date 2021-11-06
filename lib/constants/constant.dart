@@ -11,7 +11,7 @@ class Constants{
 static AuthController authController = AuthController();
 static Future<FirebaseApp> firebaseInitialization = Firebase.initializeApp();
 static FirebaseAuth auth = FirebaseAuth.instance;
-FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+static FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 static GoogleSignIn googleSign = GoogleSignIn();
 static SharedPreferences? prefs;
 

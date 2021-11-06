@@ -8,15 +8,16 @@ import 'package:news_app_flutter/constants/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async{
-    WidgetsFlutterBinding.ensureInitialized();
-    Constants.prefs = await SharedPreferences.getInstance();
-    await Constants.firebaseInitialization;
-  await Get.put(AuthController());
-  runApp( NewsApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  Constants.prefs = await SharedPreferences.getInstance();
+  
+  await Constants.firebaseInitialization;
+  Get.put(AuthController());
+  runApp( const NewsApp());
 }
 
 class NewsApp extends StatelessWidget {
-  NewsApp({ Key? key }) : super(key: key);
+  const NewsApp({ Key? key }) : super(key: key);
 
   @override
 
@@ -37,7 +38,8 @@ Widget build(BuildContext context) {
       debugShowCheckedModeBanner: false,
       theme : appTheme() ,
       getPages: AddPages.pages,
-      initialRoute: Constants.prefs!.getBool("logged") == true ? '/home' : '/login',
+      initialRoute: '/login',
+      //  == true ? '/home' : 
     );
         }
 
