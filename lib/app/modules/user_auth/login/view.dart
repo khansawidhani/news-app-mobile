@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app_flutter/app/modules/user_auth/controller.dart';
-import 'package:news_app_flutter/app/modules/user_auth/local_widgets/utils.dart';
+import 'package:news_app_flutter/app/modules/user_auth/local_widgets/auth_utils.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
