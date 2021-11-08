@@ -10,11 +10,11 @@ class NewsData {
     final status = data['status'] as String;
     final totalResults = data['totalResults'] as int;
     final articlesData = data['articles'] as List<dynamic>;
-    final articles = articlesData != null
-        ? articlesData
+    final articles = articlesData
             .map((articleData) => Article.fromJson(articleData))
             .toList()
-        : <Article>[];
+        // : <Article>[]
+        ;
     return NewsData(
         status: status, totalResults: totalResults, articles: articles);
   }
@@ -38,7 +38,6 @@ class Article {
   String? urlToImage;
   String publishedAt;
   String? content;
-  DateTime get getPublishedAt => DateTime.parse(publishedAt);
 
   factory Article.fromJson(Map<String, dynamic> data) {
     final source = Source.fromJson(data['source']);

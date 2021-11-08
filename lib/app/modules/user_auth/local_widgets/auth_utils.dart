@@ -3,11 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-// spacer for sizing
-SizedBox spacer(double height) {
-  return SizedBox(height: height);
-}
-
 // user auth screens background
 SizedBox authScreenBg(context) {
   return SizedBox(

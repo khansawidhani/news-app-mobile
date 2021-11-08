@@ -1,10 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -119,7 +117,7 @@ class AuthController extends GetxController {
     return Get.snackbar('Error', errorMsg,
         messageText: Text(
           errorMsg,
-          style: TextStyle(fontWeight: FontWeight.w600),
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
         snackPosition: SnackPosition.BOTTOM,
         colorText: Colors.black,

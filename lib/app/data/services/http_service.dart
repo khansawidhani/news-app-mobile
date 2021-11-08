@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:dio/dio.dart';
 const baseUrl = 'https://newsapi.org/';
 const apiKey = 'fa7720e2f84b4b93b5457681d58ef902';
@@ -18,11 +16,11 @@ class HttpService{
       initializeinterceptors(){
         dio!.interceptors.add(InterceptorsWrapper(
           onRequest: (options, handler ){
-            print('Requesting.... ${options.uri} + ${options.path}');
+            // print('Requesting.... ${options.uri} + ${options.path}');
             return handler.next(options);
           },
           onResponse: (Response response, handler ){
-            print("Getting response : ${response.statusCode} | ${response.statusMessage}");
+            // print("Getting response : ${response.statusCode} | ${response.statusMessage}");
             return handler.next(response);
           },
           onError: (DioError error, handler){
@@ -38,7 +36,7 @@ class HttpService{
         return response;
 
         }on DioError catch(error){
-          print(error.message);
+          // print(error.message);
           throw Exception(error.message);
         }
       }
