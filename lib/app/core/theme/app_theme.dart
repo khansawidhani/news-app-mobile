@@ -7,7 +7,7 @@ appTheme() {
       textTheme: TextTheme(
           headline1: TextStyle(
               color: Colors.white.withOpacity(0.9), fontWeight: FontWeight.bold, fontSize: 25), 
-              subtitle1: TextStyle(color: Colors.white70, fontSize: 16.0),
+              subtitle1: const TextStyle(color: Colors.white70, fontSize: 16.0),
               button: TextStyle(color: Colors.white.withOpacity(0.9), fontWeight: FontWeight.normal, fontSize: 16.0, letterSpacing: 0.5)
               ),
       
@@ -32,7 +32,7 @@ appTheme() {
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(0.0),
           padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0)),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          shape: MaterialStateProperty.all(const RoundedRectangleBorder(
             side: BorderSide(color: Colors.white),
             borderRadius: BorderRadius.all(Radius.circular(15.0))),),
           backgroundColor: MaterialStateProperty.all(Colors.transparent),
