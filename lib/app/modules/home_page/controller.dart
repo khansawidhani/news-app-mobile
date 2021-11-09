@@ -13,8 +13,11 @@ class HomeController extends GetxController {
     loadTopHeadlines();
     
   }
+
   RxBool isLoading = false.obs;
   RxList<Article>? articles;
+  RxBool isFavourite = false.obs;
+
   loadTopHeadlines() async {
     try {
       showLoading();
@@ -39,6 +42,14 @@ class HomeController extends GetxController {
   hideLoading(){
     isLoading.toggle();
   }
+  toggleFavourite(){
+    print("Favourite bool : $isFavourite");
+    isFavourite.toggle();
+  }
+  removeFavourite(){
+    isFavourite.toggle();
+  }
+
   getPublishedAt(publishedAt){
     DateTime currentTime = DateTime.now();
    DateTime time = DateTime.parse(publishedAt);

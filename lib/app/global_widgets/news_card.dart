@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:news_app_flutter/app/global_widgets/article_photo.dart';
 import 'package:news_app_flutter/app/global_widgets/text_utils.dart';
 import 'package:news_app_flutter/app/global_widgets/utils.dart';
+import 'package:news_app_flutter/app/modules/home_page/controller.dart';
 
-newsCard(BuildContext context, String? urlToImage, String? author, String title,
-    String? description, String publishedAt) {
+final homeController = Get.find<HomeController>();
+newsCard(
+    BuildContext context,
+    String? urlToImage,
+    String? author,
+    String title,
+    String? description,
+    String publishedAt,
+    RxBool isFavourite,
+    toggleFavourite) {
+      final isFavourite = homeController.isFavourite;
   return Card(
     child: Column(
       children: [
@@ -36,11 +47,19 @@ newsCard(BuildContext context, String? urlToImage, String? author, String title,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(publishedAt, style: publishedAtTextStyle(),),
+                Text(
+                  publishedAt,
+                  style: publishedAtTextStyle(),
+                ),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      print("News Card on tap : ${homeController.isFavourite.value}");
+                      toggleFavourite();
+                    },
                     icon: Icon(
-                      Icons.favorite_border,
+                      homeController.isFavourite.isTrue
+                          ? Icons.favorite
+                          : Icons.favorite_border,
                       color: Colors.red,
                       size: 20.0,
                     ))

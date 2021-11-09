@@ -27,30 +27,29 @@ class HomePage extends StatelessWidget {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : ListView.builder(
-                itemBuilder: (context, index) {
+              : ListView.builder(itemBuilder: (context, index) {
                   // if(homeController.articles!.length.isGreaterThan(0)){
                   final articles = homeController.articles!;
                   final title = articles[index].title;
                   final urlToImage = articles[index].urlToImage;
                   final author = articles[index].author;
-                  final getDescription =
-                      articles[index].description;
+                  final getDescription = articles[index].description;
                   String description = getDescription!.length >= 90
                       ? getDescription.substring(0, 90) + " ..."
                       : getDescription;
-                  final publishedAt =
-                      articles[index].publishedAt;
+                  final publishedAt = articles[index].publishedAt;
                   final getPublishedAt =
                       homeController.getPublishedAt(publishedAt);
+                  final RxBool isFavourite = homeController.isFavourite;
+                  final toggleFavourite = homeController.toggleFavourite;
                   return Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 5.0, vertical: 5.0),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(25.0)),
-                        child: 
-                        newsCard(context, urlToImage, author, title, description, getPublishedAt)
-                        ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(25.0)),
+                        child: newsCard(context, urlToImage, author, title,
+                            description, getPublishedAt, isFavourite, toggleFavourite)),
                   );
                   // }
                   // return Center(child: CircularProgressIndicator(),);
@@ -60,5 +59,3 @@ class HomePage extends StatelessWidget {
         }));
   }
 }
-
-
