@@ -17,9 +17,8 @@ A very easy and simple News Application for Android OS.
     - Firebase User Authentication
     - Firebase Database for User Profile Management
     - Firebase Storage for User images
-3. Api Integration for Fetching News
-4. NodeJS
-5. MongoDB
+3. Restful Api Integration for Fetching News
+4. Hive DB for Local Storage
 
 
 # Screens:
