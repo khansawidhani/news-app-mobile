@@ -22,7 +22,7 @@ A very easy and simple News Application for Android OS.
 
 
 # Screens:
-1. Splash Screen
+1. Welcome Screen
 2. User SignUp and Login 
 3. Home Page
 4. Search News Page
