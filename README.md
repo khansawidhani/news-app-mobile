@@ -8,7 +8,7 @@ A very easy and simple News Application for Android OS.
 2. Search news with keyword
 3. Favourite News
 4. User Authentication
-5. News Filteration functionality
+5. News Filteration functionality (will be updated soon)
 
 
 # Technologies:
