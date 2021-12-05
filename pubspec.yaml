@@ -41,13 +41,24 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  sqflite: ^2.0.0+4
   path_provider: ^2.0.6
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
+  splash_screen_view: ^3.0.0
+  
+#For splash screen view information
+splash_screen_view:
+  # color: "#ffcc00"
+  image: "assets/images/the_news_logo.png"
+
+  background_image: "assets/images/bg.jpg"
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.1.5
+  hive_generator: ^1.1.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -59,6 +70,7 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+  # image: "assets/images/logo.png"
 # The following section is specific to Flutter.
 flutter:
 
