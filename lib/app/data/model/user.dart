@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModal{
-  UserModal({required this.name, required this.email, required this.photoUrl});
+  UserModal({required this.id, required this.name, required this.email, this.photoUrl});
+  String id;
     String name;
     String email;
-    String photoUrl;
+    String? photoUrl;
+
 }
 // User = User(
 //   displayName: Khansa Widhani, 

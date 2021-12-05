@@ -1,26 +1,8 @@
-class NewsData {
-  NewsData(
-      {required this.status,
-      required this.totalResults,
-      required this.articles});
-  String status;
-  int totalResults;
-  List<Article> articles;
-  factory NewsData.fromJson(Map<String, dynamic> data) {
-    final status = data['status'] as String;
-    final totalResults = data['totalResults'] as int;
-    final articlesData = data['articles'] as List<dynamic>;
-    final articles = articlesData
-            .map((articleData) => Article.fromJson(articleData))
-            .toList()
-        // : <Article>[]
-        ;
-    return NewsData(
-        status: status, totalResults: totalResults, articles: articles);
-  }
-}
+import 'package:hive/hive.dart';
+import 'package:news_app_flutter/app/data/model/source.dart';
 
-class Article {
+
+class Article{
   Article(
       {required this.source,
       this.author,
@@ -31,12 +13,19 @@ class Article {
       required this.publishedAt,
       this.content});
   Source source;
+  
   String? author;
+  
   String title;
+  
   String? description;
+  
   String url;
+  
   String? urlToImage;
+  
   String publishedAt;
+  
   String? content;
 
   factory Article.fromJson(Map<String, dynamic> data) {
@@ -56,12 +45,14 @@ class Article {
         url: url,
         urlToImage: urlToImage,
         publishedAt: publishedAt,
-        content: content);
+        content: content, 
+        
+        );
   }
 
   Map<String, dynamic> toJson(){
     return {
-      'source' : source,
+      'source' : source.toJson(),
       'author' : author, 
       'title' : title,
       'description' : description,
@@ -73,13 +64,4 @@ class Article {
   }
 }
 
-class Source {
-  Source({this.id, this.name});
-  String? id;
-  String? name;
-  factory Source.fromJson(Map<String, dynamic> data) {
-    final id = data['id'] as String?;
-    final name = data['name'] as String?;
-    return Source(id: id, name: name);
-  }
-}
+
