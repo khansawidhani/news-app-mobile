@@ -24,6 +24,8 @@ Text topHeading(String text, context) {
   return Text(
     text,
     style: Theme.of(context).textTheme.headline1,
+    textAlign: TextAlign.center,
+
   );
 }
 
@@ -32,6 +34,7 @@ Text subHeading(String text, context) {
   return Text(
     text,
     style: Theme.of(context).textTheme.subtitle1,
+    textAlign: TextAlign.center,
   );
 }
 
@@ -48,7 +51,7 @@ TextFormField userNameInputField(TextEditingController _controller) {
 }
 
 // user email field
-TextFormField emailInputField(TextEditingController _controller) {
+TextFormField emailInputField(_controller) {
   return TextFormField(
     controller: _controller,
     style: inputStyle,
@@ -57,7 +60,7 @@ TextFormField emailInputField(TextEditingController _controller) {
 }
 
 // password field
-TextFormField passwordInputField(TextEditingController _controller) {
+TextFormField passwordInputField(_controller) {
   return TextFormField(
     controller: _controller,
     obscureText: true,
@@ -68,7 +71,7 @@ TextFormField passwordInputField(TextEditingController _controller) {
 }
 
 // confirm password field
-TextFormField confirmPasswordInputField(TextEditingController _controller) {
+TextFormField confirmPasswordInputField(_controller) {
   return TextFormField(
     controller: _controller,
     obscureText: true,

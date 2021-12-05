@@ -7,53 +7,14 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:news_app_flutter/constants/constant.dart';
+import 'package:news_app_flutter/app/constants/constant.dart';
+import 'package:news_app_flutter/app/data/model/boxes.dart';
+import 'package:news_app_flutter/app/data/model/saved_user.dart';
 
 class AuthController extends GetxController {
   late Rx<User?> firebaseUser;
   late Rx<GoogleSignInAccount?> googleSignInAccount;
-  Rx<bool> isCreated = false.obs;
-  Rx<bool> isLoading = true.obs;
 
-  @override
-  void onReady() async {
-    super.onReady();
-    // auth is comning from the constants.dart file but it is basically FirebaseAuth.instance.
-    // Since we have to use that many times I just made a constant file and declared there
-    firebaseUser = Rx<User?>(Constants.auth.currentUser);
-
-    Rx<GoogleSignInAccount?> googleSignInAccount =
-        Rx<GoogleSignInAccount?>(Constants.googleSign.currentUser);
-
-    firebaseUser.bindStream(Constants.auth.userChanges());
-    ever(firebaseUser, _setInitialScreen);
-
-    googleSignInAccount.bindStream(Constants.googleSign.onCurrentUserChanged);
-    ever(googleSignInAccount, _setInitialScreenGoogle);
-  }
-
-  _setInitialScreen(User? user) {
-    if (user == null) {
-      // if the user is not found then the user is navigated to the Signup Screen
-      Get.offAllNamed('/login');
-    } else {
-      if (Constants.prefs!.getBool('loggedin') == true) {
-        Get.offAllNamed('/home');
-      }
-      // if the user exists and logged in the the user is navigated to the Home Screen
-    }
-  }
-
-  _setInitialScreenGoogle(GoogleSignInAccount? googleSignInAccount) {
-    print(googleSignInAccount);
-    if (googleSignInAccount == null) {
-      // if the user is not found then the user is navigated to the Register Screen
-      Get.offNamed('/login');
-    } else {
-      Constants.prefs!.getBool("loggedin") == true ? Get.offNamed('/home') : CircularProgressIndicator();
-      // if the user exists and logged in the the user is navigated to the Home Screen
-    }
-  }
   showSuccessDialog(){
     Get.defaultDialog(
             title: 'Success!',
@@ -96,20 +57,9 @@ class AuthController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       colorText: Colors.black,
       backgroundColor: Colors.green,
-      // duration: const Duration(milliseconds: 5000),
+      
       isDismissible: true,
-      // mainButton: TextButton(
-      //     onPressed: () {
-      //       if(isCreated.isFalse){
-      //         isCreated.toggle();
-      //       }
-      //       print(isCreated);
-
-      //     },
-      //     child: const Text(
-      //       'Dismiss',
-      //       style: TextStyle(color: Colors.white),
-      //     ))
+      
     );
   }
 
@@ -160,17 +110,21 @@ class AuthController extends GetxController {
           'fullname' : name,
           'email' : email, 
           'photoUrl' : photoUrl
-        }).then((value) => {
+        }).then((value)async{
+
+      SavedUser localUser = SavedUser()
+      ..uid = uid
+      ..isLoggedin = true;
+      await Boxes.getLocalUser().add(localUser);
           Get.defaultDialog(
             title: 'Success',
             content: Text('Your google account has been connected', style: TextStyle(
                 color: Colors.green[800], fontWeight: FontWeight.bold)),
             actions: [
               TextButton(
-                onPressed: () {
-                  Constants.prefs!.setBool("loggedin", true);
-                  Constants.prefs!.setString("uid", user.uid);
-                  Get.offAllNamed('/home');
+                onPressed: (){
+                
+                  Get.offAllNamed('/dashboard');
                 },
                 child: const Text('Continue'),
                 style: ButtonStyle(
@@ -179,7 +133,7 @@ class AuthController extends GetxController {
                 ),
               ),
             ],
-          ),
+          );
         }
         ).catchError((error)=> throw error);
       }
@@ -262,9 +216,13 @@ class AuthController extends GetxController {
       final UserCredential userCredential = await Constants.auth
           .signInWithEmailAndPassword(email: email, password: password);
       print("Login Successful => ${userCredential.user!.email}");
-      Constants.prefs!.setBool("loggedin", true);
-      Constants.prefs!.setString("uid", userCredential.user!.uid);
-      Get.offAllNamed('/home');
+      final String uid = userCredential.user!.uid;
+
+      SavedUser localUser = SavedUser()
+      ..uid = uid
+      ..isLoggedin = true;
+      await Boxes.getLocalUser().add(localUser);
+      Get.offAllNamed('/dashboard');
     } catch (firebaseAuthException) {
       print(firebaseAuthException);
     }
@@ -272,8 +230,71 @@ class AuthController extends GetxController {
 
   Future signOut() async {
     await Constants.auth.signOut();
-    Constants.prefs!.setBool("loggedin", false);
-    Constants.prefs!.remove("uid");
+    await Boxes.getLocalUser().clear();
+    
     Get.offNamed('/login');
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// void onReady() async {
+//     super.onReady();
+    
+    // firebaseUser = Rx<User?>(Constants.auth.currentUser);
+    // print("Firebase : $firebaseUser");
+
+    // Rx<GoogleSignInAccount?> googleSignInAccount =
+    //     Rx<GoogleSignInAccount?>(Constants.googleSign.currentUser);
+    // print("Google: $googleSignInAccount");
+
+    // firebaseUser.bindStream(Constants.auth.userChanges());
+    // ever(firebaseUser, _setInitialScreen);
+
+    // googleSignInAccount.bindStream(Constants.googleSign.onCurrentUserChanged);
+    // ever(googleSignInAccount, _setInitialScreenGoogle);
+  // }
+
+  // _setInitialScreen(User? user) {
+  //   if (user == null) {
+  //     // if the user is not found then the user is navigated to the Signup Screen
+  //     Get.offAllNamed('/login');
+  //   } 
+    
+  //   else {
+  //     if (Boxes.getLocalUser().values.isNotEmpty && Boxes.getLocalUser().values.first.isLoggedin == true && Boxes.getLocalUser().values.first.uid == user.uid){
+  //       Get.offAll(()=>AuthenticationScreen());
+  //     }
+  //     // if the user exists and logged in the the user is navigated to the Home Screen
+  //   }
+  // }
+
+  // _setInitialScreenGoogle(GoogleSignInAccount? googleSignInAccount) {
+  //   print(googleSignInAccount);
+  //   if (googleSignInAccount == null) {
+  //     // if the user is not found then the user is navigated to the Register Screen
+  //     Get.offNamed('/login');
+  //   } 
+  //   else {
+  //     if (Boxes.getLocalUser().values.isNotEmpty && Boxes.getLocalUser().values.first.isLoggedin == true && Boxes.getLocalUser().values.first.uid == googleSignInAccount.id){
+  //       Get.offAll(()=>AuthenticationScreen());
+  //     }
+  //     // Get.offAll(()=> AuthenticationScreen());
+  //   //   Constants.prefs!.getBool('loggedin') == true ? Get.offNamed('/dashboard') : const CircularProgressIndicator();
+  //   //   // if the user exists and logged in the the user is navigated to the Home Screen
+  //   }
+  // }

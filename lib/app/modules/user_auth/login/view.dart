@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app_flutter/app/global_widgets/utils.dart';
+import 'package:news_app_flutter/app/global/widgets/utils.dart';
 import 'package:news_app_flutter/app/modules/user_auth/controller.dart';
 import 'package:news_app_flutter/app/modules/user_auth/local_widgets/auth_utils.dart';
 
@@ -59,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                       orText(),
                       spacer(20.0),
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(20.0))
                         ),
                         alignment: Alignment.bottomCenter,
