@@ -4,5 +4,6 @@ class Routes{
   static const signup = '/signup';
   static const search = '/search';
   static const favourites = '/favourites';
+  static const dashboard = '/dashboard';
    
 }
