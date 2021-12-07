@@ -20,7 +20,7 @@ class Dashboard extends StatelessWidget {
           HomeScreen(),
           NewsScreen(),
           BookmarksScreen(),
-          const ProfileScreen()
+          ProfileScreen()
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(

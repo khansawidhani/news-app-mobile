@@ -13,6 +13,7 @@ import 'package:news_app_flutter/app/modules/user_auth/controller.dart';
 class InitBinding extends Bindings{
   @override
   void dependencies() {
+    Get.put(AuthController());
     Get.put(DashboardController());
     Get.put(NewsRepository());
     Get.put(Controller());

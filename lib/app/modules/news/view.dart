@@ -24,7 +24,7 @@ class NewsScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white.withOpacity(0.9),
         appBar: AppBar(
-          title: const Text('The News'),
+          title: const Text('Top Headlines'),
           centerTitle: true,
           backgroundColor: Colors.red[800],
         ),

@@ -18,8 +18,12 @@ class BookmarksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepOrange[200], 
-        appBar: AppBar(),
+      backgroundColor: Colors.grey.withOpacity(0.3),
+        appBar: AppBar(
+          title: const Text("Bookmarked Articles"),
+          backgroundColor: Colors.red.shade800,
+          
+        ),
         body: ValueListenableBuilder<Box<HiveArticle>>(
           valueListenable: Boxes.getArticles().listenable(),
           builder: (context, articleBox, _) {

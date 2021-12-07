@@ -46,20 +46,7 @@ final categoryController = Get.find<Controller>();
           ),
         ),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            DrawerHeader(child: Container()),
-            ListTile(
-              title: Text('Logout'),
-              leading: Icon(
-                Icons.logout_outlined,
-                color: Colors.red[600],
-              ),
-            )
-          ],
-        ),
-      ),
+      
       body:    
       TabBarView(
             controller: homeController.controller,

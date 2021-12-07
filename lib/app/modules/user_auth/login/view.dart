@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          // fit: StackFit.expand,
+          fit: StackFit.expand,
           children: [
             authScreenBg(context),
             Center(
